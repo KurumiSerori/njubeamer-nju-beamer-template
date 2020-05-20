@@ -51,10 +51,12 @@
 % This would show a highlightened toc before each section
 \AtBeginSection[]
 {
+  \setbeamertemplate{background}{\pgfuseimage{bg}}
   \begin{frame}
     \frametitle{目录}
     \tableofcontents[currentsection]
   \end{frame}
+    \setbeamertemplate{background}{}
 }
 
 
@@ -149,6 +151,7 @@ try {
 \end{frame}
 
 % If needed
+\setbeamertemplate{background}{\pgfuseimage{bg}}
 \frame{\tableofcontents}
 
 \end{document}

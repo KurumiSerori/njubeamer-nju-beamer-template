@@ -16,6 +16,9 @@
 % Enumerate items: default, circle, square, ball
 \setbeamertemplate{enumerate items}[circle]
 
+% Caption
+\setbeamertemplate{caption}[numbered]
+
 % Outline: default, sections numbered, subsections numbered, circle, square, ball, ball unnumbered
 \setbeamertemplate{sections/subsections in toc}[default]
 
@@ -60,7 +63,7 @@
     \usebeamerfont{author in head/foot}\insertshortdate
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.485\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-   \usebeamerfont{author in head/foot}{南京大学数学系}
+   \usebeamerfont{author in head/foot}{南京大学计算机系}
   \end{beamercolorbox}%
    \begin{beamercolorbox}[wd=0.065\paperwidth,ht=2.25ex,dp=1ex,right]{title in head/foot}%
     \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
@@ -68,17 +71,41 @@
   \vskip0pt%
 }
 
+\defbeamertemplate*{headline}{nju theme no tos}{%
+  \leavevmode%
+  \@tempdimb=6.4375ex%
+    \pgfdeclareimage[height=.95\@tempdimb]{logo}{njulogo.pdf}%
+    \pgfdeclareimage[height=1.\@tempdimb]{title_logo}{njuname.png}%
+    \pgfdeclareimage[height=1.\@tempdimb]{institute_logo}{institute_logo.png}%
+  \logo{\pgfuseimage{logo}}%
+  \ifdim\@tempdimb>0pt%
+    \advance\@tempdimb by 1.125ex%
+     \begin{beamercolorbox}[wd=.15\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\pgfuseimage{institute_logo}\vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.65\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\vfil}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.135\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\pgfuseimage{title_logo}\vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.065\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertlogo\vfil\vfil}%
+    \end{beamercolorbox}%
+  \fi%
+}
+
 \defbeamertemplate*{headline}{nju theme}{%
   \leavevmode%
   \@tempdimb=6.4375ex%
     \pgfdeclareimage[height=.95\@tempdimb]{logo}{njulogo.pdf}%
     \pgfdeclareimage[height=1.\@tempdimb]{title_logo}{njuname.png}%
-    \pgfdeclareimage[height=1.\@tempdimb]{math_logo}{njumath.png}%
+    \pgfdeclareimage[height=1.\@tempdimb]{institute_logo}{institute_logo.png}%
   \logo{\pgfuseimage{logo}}%
   \ifdim\@tempdimb>0pt%
     \advance\@tempdimb by 1.125ex%
      \begin{beamercolorbox}[wd=.15\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
-      \vbox to\@tempdimb{\vfil\pgfuseimage{math_logo}\vfil}%
+      \vbox to\@tempdimb{\vfil\pgfuseimage{institute_logo}\vfil}%
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.65\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
       \vbox to\@tempdimb{\vfil\insertsectionnavigationhorizontal{.5\textwidth}{\hskip0pt 

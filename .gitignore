@@ -1,0 +1,30 @@
+## Core latex/xelatex auxiliary files
+*.aux
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.nav
+*.snm
+*.upa
+*.vrb
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.blg
+
+## minted (the package)
+_minted*/
+
+## Generated pdf
+*.pdf
+
+## MacOS
+.DS_Store
+
+## self defined
+bg.png
+institute_logo.jpg
+institute_logo_full.png
+

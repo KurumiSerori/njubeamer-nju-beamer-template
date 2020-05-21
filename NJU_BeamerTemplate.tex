@@ -1,40 +1,83 @@
 %!TEX program = xelatex
 %!TEX options = --shell-escape
-\documentclass[10pt,aspectratio=169,mathserif]{beamer}		
-\usepackage{nju}			                % nju template
+\documentclass[10pt,aspectratio=169,mathserif]{beamer}
+% ---------------- Packages and their settings ----------------
+% Adjust as you want
+\usepackage{nju}			                      % import nju template
 \usepackage{ctex}                           % support Chinese
 \usepackage{amsmath,amsfonts,amssymb,bm}    % math packages
-\usepackage{color}			 				% support colored text
+\usepackage{color}			 				            % support colored text
 \usepackage{graphicx,hyperref,url}	
+
+% By the way, go check Présentation.app if you are on MacOS
 \usepackage[draft]{pdfcomment}              % would be helpful in presentation mode
-% \usepackage[final]{pdfcomment}
+% \usepackage[final]{pdfcomment}            % if you do not want PDF annotations be typeset
+
 \usepackage{caption}
 \captionsetup[figure]{font=footnotesize}
-\usepackage{amsmath}
+
 \usepackage{multirow}
-\newcommand{\xdownarrow}[2][]{%
-\left.{#1}\right\downarrow{#2}}
-\usepackage{url}
 \usepackage{media9}
-\usepackage{minted}                         % better source code highlighting
+\usepackage{minted}                         % better source code highlighting, you have to add --shell-escape to enable it
 
-
-% If you have uncommon letter in name just like me...
-\setCJKmainfont[ItalicFont=Adobe Kaiti Std, BoldFont=Adobe Heiti Std]{Adobe Song Std}
-\setCJKsansfont{Adobe Heiti Std}
-\setCJKmonofont{Adobe Fangsong Std}
-
-\hypersetup{
-  colorlinks,
-  allcolors=.,
-  urlcolor=blue,
-  % linkcolor=green,
-  % linkbordercolor=red,
-  % pdfborderstyle={/S/U/W 1},
+\usepackage{tikz}                           % for tikz picturing
+\usetikzlibrary{
+  arrows.meta,
+  automata,
+  backgrounds,
+  calc,
+  calendar,
+  er,
+  intersections,
+  mindmap,
+  math,
+  matrix,
+  folding,
+  graphs,
+  patterns,
+  plothandlers,
+  plotmarks,
+  positioning,
+  shapes,
+  snakes,
+  topaths,
+  trees,
+  %...
 }
 
+% An example of tikz picture, you can remove it 
+\newcommand\sqrtspiral[2][]{%
+\tikz[line cap=round, x=2cm,y=2cm, line join=round,#1]{%
+\tikzmath{%
+  int \n;
+  \b = 0; \d = 1; \N = #2;
+  for \n in {1,...,\N}{
+    \l = (\n == \N && \N > 1) ? "red" : "black";
+    \e = (\n == 1) ? " -- cycle" : "";
+    { % --------------------------------------------------- outside math library
+      \path [rotate=\b, draw=\l] (0,0) -- (\d,1) -- (\d,0)
+        node [\l, midway, anchor=\b+180] {1}
+        \e (\d/2, 0)  node [fill=white] { \tikzmath{ % -- back in math library
+            if \n == 1 then {
+              {$1$}; % ------------------------- $1$ is outside math library
+            } else {
+              {$\sqrt{\n}$}; % --------- $\sqrt{\n}$ is outside math library
+            };
+          }% -------------------------------------------- outside math library
+        };
+      \path [draw=\l, rotate=\b] (\d-.1,0) |- ++(.1,.1);
+    }; % -------------------------------------------------- back in math library
+    \d = sqrt(1+(\d)^2); \b = \b + asin(1/\d);
+  };
+  { % ----------------------------------------------------- outside math library
+    \path [rotate=\b, \l] (\d/2, 0) node [fill=white] {$\sqrt x$};
+  }; % ---------------------------------------------------- back in math library
+}}}
 
-\newcommand{\pdfnote}[1]{\marginnote{\pdfcomment[icon=note]{#1}}}   % move the note away from the main content of your slide
+
+\newcommand{\pdfnote}[1]{\marginnote{\pdfcomment[icon=note]{#1}}}   % pdfnote move the annotation away from the main content of your slide
+\newcommand{\xdownarrow}[2][]{%
+\left.{#1}\right\downarrow{#2}}
 \newcommand\blfootnote[1]{%
 \begingroup
 \renewcommand\thefootnote{}\footnote{#1}%
@@ -44,6 +87,23 @@
 % \newif\ifplacelogo % create a new conditional
 % \placelogotrue % set it to true
 \newcommand{\nologo}{\setbeamertemplate{logo}{}}    % command to set the logo to nothing
+
+
+% ---------------- Settings ----------------
+% If you have uncommon letter in name just like me...
+\setCJKmainfont[ItalicFont=Adobe Kaiti Std, BoldFont=Adobe Heiti Std]{Adobe Song Std}
+\setCJKsansfont{Adobe Heiti Std}
+\setCJKmonofont{Adobe Fangsong Std}
+
+
+\hypersetup{
+  colorlinks,
+  allcolors=.,
+  urlcolor=blue,
+  % linkcolor=green,
+  % linkbordercolor=red,
+  % pdfborderstyle={/S/U/W 1},
+}
 
 
 \beamertemplateballitem
@@ -60,7 +120,7 @@
 }
 
 
-% Front page
+% ---------------- Front page settings ----------------
 \title[]{移动应用推广中流量劫持作弊行为的\\大规模检测与分析}
 \subtitle{}
 \author[]{赵旻睿}
@@ -69,17 +129,19 @@
 \date{\today}
 \logo{\includegraphics[height=1.5cm]{cosec.jpg}{\hspace{30pt}}}    % If you do not need logo, just comment out it
 
+
+% ---------------- Document begins ----------------
 \begin{document}
 
-\setbeamertemplate{headline}[nju theme no tos] 
+\setbeamertemplate{headline}[nju theme no tos]
 \frame{\titlepage}
 
 \nologo
-
 \setbeamertemplate{headline}[nju theme]
 
 \frame{\frametitle{目录}\tableofcontents}			
 
+% Now followed blindtext, just for test
 \section{Section 1}
 \begin{frame}
   \frametitle{Section 1}
@@ -128,7 +190,10 @@ try {
 \section{Section 3}
 \begin{frame}
   \frametitle{Section 3}
-	   
+    \resizebox{4cm}{4cm}{%
+      \sqrtspiral{10}
+    }
+~\vfill
     Example of pdfcomment
     \pdfcomment{
     blahblahblah, \textCR
@@ -147,7 +212,7 @@ try {
 
 \setbeamertemplate{headline}[nju theme no tos] 
 \begin{frame}
-    \centering \large Thanks for watching!
+    \centering \Large Thanks for watching!
 \end{frame}
 
 % If needed

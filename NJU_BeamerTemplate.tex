@@ -45,35 +45,6 @@
   %...
 }
 
-% An example of tikz picture, you can remove it 
-\newcommand\sqrtspiral[2][]{%
-\tikz[line cap=round, x=2cm,y=2cm, line join=round,#1]{%
-\tikzmath{%
-  int \n;
-  \b = 0; \d = 1; \N = #2;
-  for \n in {1,...,\N}{
-    \l = (\n == \N && \N > 1) ? "red" : "black";
-    \e = (\n == 1) ? " -- cycle" : "";
-    { % --------------------------------------------------- outside math library
-      \path [rotate=\b, draw=\l] (0,0) -- (\d,1) -- (\d,0)
-        node [\l, midway, anchor=\b+180] {1}
-        \e (\d/2, 0)  node [fill=white] { \tikzmath{ % -- back in math library
-            if \n == 1 then {
-              {$1$}; % ------------------------- $1$ is outside math library
-            } else {
-              {$\sqrt{\n}$}; % --------- $\sqrt{\n}$ is outside math library
-            };
-          }% -------------------------------------------- outside math library
-        };
-      \path [draw=\l, rotate=\b] (\d-.1,0) |- ++(.1,.1);
-    }; % -------------------------------------------------- back in math library
-    \d = sqrt(1+(\d)^2); \b = \b + asin(1/\d);
-  };
-  { % ----------------------------------------------------- outside math library
-    \path [rotate=\b, \l] (\d/2, 0) node [fill=white] {$\sqrt x$};
-  }; % ---------------------------------------------------- back in math library
-}}}
-
 
 \newcommand{\pdfnote}[1]{\marginnote{\pdfcomment[icon=note]{#1}}}   % pdfnote move the annotation away from the main content of your slide
 \newcommand{\xdownarrow}[2][]{%
@@ -190,10 +161,6 @@ try {
 \section{Section 3}
 \begin{frame}
   \frametitle{Section 3}
-    \resizebox{4cm}{4cm}{%
-      \sqrtspiral{10}
-    }
-~\vfill
     Example of pdfcomment
     \pdfcomment{
     blahblahblah, \textCR
